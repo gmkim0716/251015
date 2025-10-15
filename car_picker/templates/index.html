@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Picker Quiz</title>
+    <link rel="stylesheet" href="/static/assets/styles.css" />
+  </head>
+  <body data-theme="dark" data-font="pretendard">
+    <div class="app-shell">
+      <header class="app-header">
+        <div>
+          <h1>Car Picker Quiz</h1>
+          <p class="subtitle">
+            Identify the car in each image by make, model, and year depending on the challenge level.
+          </p>
+        </div>
+        <div class="header-actions">
+          <button id="theme-toggle" class="ghost-button" type="button">Dark Theme</button>
+          <button id="settings-toggle" class="ghost-button" type="button">Settings</button>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="question-panel">
+          <div class="image-wrapper">
+            <img id="question-image" alt="Quiz car" />
+            <div id="timer" class="timer">--</div>
+          </div>
+          <div class="prompt">
+            <span id="prompt-text">Loading the next question...</span>
+          </div>
+          <div id="options" class="options-grid"></div>
+          <div class="controls">
+            <button id="submit-button" type="button" class="primary-button">Submit Answer</button>
+            <button id="next-button" type="button" class="secondary-button" disabled>Next Question</button>
+          </div>
+          <div id="feedback" class="feedback"></div>
+        </section>
+
+        <aside class="sidebar">
+          <section class="score-card">
+            <h2>My Stats</h2>
+            <div class="score-metrics">
+              <div>
+                <span class="metric-label">Correct</span>
+                <span id="stat-correct" class="metric-value">0</span>
+              </div>
+              <div>
+                <span class="metric-label">Attempts</span>
+                <span id="stat-attempts" class="metric-value">0</span>
+              </div>
+              <div>
+                <span class="metric-label">Streak</span>
+                <span id="stat-streak" class="metric-value">0</span>
+              </div>
+              <div>
+                <span class="metric-label">Accuracy</span>
+                <span id="stat-accuracy" class="metric-value">0%</span>
+              </div>
+            </div>
+            <form id="player-form" class="player-form">
+              <label for="player-name">Leaderboard nickname</label>
+              <input id="player-name" type="text" maxlength="20" placeholder="Enter a nickname" />
+              <button type="submit" class="ghost-button small">Save</button>
+            </form>
+            <div id="server-score" class="server-score"></div>
+          </section>
+
+          <section class="leaderboard">
+            <div class="leaderboard-header">
+              <h2>Leaderboard Top 10</h2>
+              <button id="refresh-leaderboard" class="ghost-button small" type="button">
+                Refresh
+              </button>
+            </div>
+            <ol id="leaderboard-list" class="leaderboard-list"></ol>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <dialog id="settings-dialog" class="settings-dialog">
+      <form method="dialog" class="settings-card">
+        <header>
+          <h2>Settings</h2>
+        </header>
+        <section class="settings-group">
+          <h3>Difficulty</h3>
+          <label><input type="radio" name="difficulty" value="make" /> Make only</label>
+          <label
+            ><input type="radio" name="difficulty" value="make_model" />
+            Make + Model</label
+          >
+          <label
+            ><input type="radio" name="difficulty" value="make_model_year" />
+            Make + Model + Year</label
+          >
+        </section>
+        <section class="settings-group">
+          <h3>Time limit (seconds)</h3>
+          <input id="timer-input" type="number" min="10" max="60" step="5" />
+          <p class="help-text">Questions that exceed the limit count as incorrect.</p>
+        </section>
+        <section class="settings-group">
+          <h3>Theme</h3>
+          <label><input type="radio" name="theme" value="light" /> Light</label>
+          <label><input type="radio" name="theme" value="dark" /> Dark</label>
+        </section>
+        <section class="settings-group">
+          <h3>Font</h3>
+          <select id="font-select">
+            <option value="pretendard">Pretendard</option>
+            <option value="noto">Noto Sans KR</option>
+            <option value="plex">IBM Plex Sans KR</option>
+          </select>
+        </section>
+        <footer class="settings-footer">
+          <button id="settings-cancel" type="button" class="ghost-button">Cancel</button>
+          <button id="settings-save" type="submit" class="primary-button">Save</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <script type="module" src="/static/assets/app.js"></script>
+  </body>
+</html>

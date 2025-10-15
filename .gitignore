@@ -1,0 +1,15 @@
+# Python venv
+.venv/
+
+# VS Code settings
+.vscode/
+
+# Bytecode / caches
+__pycache__/
+*.py[cod]
+
+# Data
+car_picker/data/
+
+# Installer artifacts
+python-installer.exe
