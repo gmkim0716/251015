@@ -59,31 +59,69 @@
             <title id="worldMapTitle">Stylised world map</title>
             <defs>
               <linearGradient id="oceanGradient" x1="0%" x2="100%">
-                <stop offset="0%" stop-color="#051937" />
-                <stop offset="50%" stop-color="#1d2951" />
-                <stop offset="100%" stop-color="#09203f" />
+                <stop offset="0%" stop-color="#041a2f" />
+                <stop offset="40%" stop-color="#052d4f" />
+                <stop offset="100%" stop-color="#03203b" />
               </linearGradient>
-              <linearGradient id="continentGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#3ed598" />
-                <stop offset="100%" stop-color="#2dba8f" />
+              <radialGradient
+                id="oceanHighlight"
+                cx="62%"
+                cy="42%"
+                r="75%"
+              >
+                <stop offset="0%" stop-color="rgba(76, 201, 240, 0.35)" />
+                <stop offset="55%" stop-color="rgba(32, 112, 180, 0.08)" />
+                <stop offset="100%" stop-color="rgba(3, 10, 25, 0)" />
+              </radialGradient>
+              <linearGradient
+                id="continentGradient"
+                x1="0%"
+                y1="0%"
+                x2="0%"
+                y2="100%"
+              >
+                <stop offset="0%" stop-color="#58f3c6" />
+                <stop offset="65%" stop-color="#37d7b5" />
+                <stop offset="100%" stop-color="#22af96" />
+              </linearGradient>
+              <linearGradient id="continentEdge" x1="0%" x2="100%">
+                <stop offset="0%" stop-color="rgba(255, 255, 255, 0.55)" />
+                <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
               </linearGradient>
             </defs>
             <rect width="800" height="400" fill="url(#oceanGradient)" />
-            <path
+            <rect width="800" height="400" fill="url(#oceanHighlight)" />
+            <g class="latitude-lines" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1">
+              <path d="M0 80h800" />
+              <path d="M0 160h800" />
+              <path d="M0 240h800" />
+              <path d="M0 320h800" />
+            </g>
+            <g
               class="continent"
-              d="M80 120c35-70 150-95 220-70 42 15 68 52 56 86-15 45-70 35-96 65-20 23-5 55-48 72-39 15-102 6-126-32-20-32-15-82-6-121z"
               fill="url(#continentGradient)"
-            />
-            <path
-              class="continent"
-              d="M320 110c40-50 120-70 190-50 70 20 110 80 94 126-14 41-64 58-106 70-40 12-70 28-98 36-30 9-60 2-74-18-21-30-28-115-6-164z"
-              fill="url(#continentGradient)"
-            />
-            <path
-              class="continent"
-              d="M560 150c25-45 100-70 150-50 40 16 70 56 60 93-12 45-60 60-90 80-28 19-42 37-76 40-42 4-77-18-88-52-13-38 15-76 44-111z"
-              fill="url(#continentGradient)"
-            />
+              stroke="url(#continentEdge)"
+              stroke-width="1.8"
+            >
+              <path
+                d="M54 140c28-70 136-110 214-88 52 14 82 54 73 92-9 43-65 51-92 78-24 23-11 58-52 77-41 19-108 12-136-28-24-32-19-86-7-131z"
+              />
+              <path
+                d="M292 112c42-62 146-92 228-66 76 25 126 96 108 148-18 49-84 64-124 82-40 18-66 38-108 46-38 7-70-3-88-28-25-34-30-124-16-182z"
+              />
+              <path
+                d="M558 160c24-52 116-90 176-66 44 18 78 64 70 103-10 50-64 70-102 94-32 20-46 42-82 46-48 4-88-20-102-60-16-44 10-84 40-117z"
+              />
+              <path
+                d="M690 90c12-20 44-32 68-24 26 9 46 28 44 48-2 20-20 34-32 46-12 10-16 18-30 20-20 2-36-8-40-24-6-18 2-38-10-54z"
+              />
+            </g>
+            <g class="longitude-lines" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1">
+              <path d="M160 0v400" />
+              <path d="M320 0v400" />
+              <path d="M480 0v400" />
+              <path d="M640 0v400" />
+            </g>
           </svg>
 
           <button
@@ -131,24 +169,48 @@
             <span class="city-name">Dubai</span>
             <span class="city-state" aria-hidden="true">&#9728;</span>
           </button>
-          <button
-            class="city-marker"
-            data-city="seoul"
-            data-timezone="Asia/Seoul"
-            style="--x: 580; --y: 150;"
+          <div
+            class="city-anchor"
+            data-orientation="right"
+            style="
+              --x: 580;
+              --y: 150;
+              --callout-offset: 132px;
+              --callout-length: 132px;
+              --callout-rise: -24px;
+              --callout-angle: -6deg;
+            "
           >
-            <span class="city-name">Seoul</span>
-            <span class="city-state" aria-hidden="true">&#9790;</span>
-          </button>
-          <button
-            class="city-marker"
-            data-city="tokyo"
-            data-timezone="Asia/Tokyo"
-            style="--x: 610; --y: 160;"
+            <button
+              class="city-marker city-marker--callout"
+              data-city="seoul"
+              data-timezone="Asia/Seoul"
+            >
+              <span class="city-name">Seoul</span>
+              <span class="city-state" aria-hidden="true">&#9790;</span>
+            </button>
+          </div>
+          <div
+            class="city-anchor"
+            data-orientation="right"
+            style="
+              --x: 610;
+              --y: 160;
+              --callout-offset: 136px;
+              --callout-length: 136px;
+              --callout-rise: 18px;
+              --callout-angle: 8deg;
+            "
           >
-            <span class="city-name">Tokyo</span>
-            <span class="city-state" aria-hidden="true">&#9728;</span>
-          </button>
+            <button
+              class="city-marker city-marker--callout"
+              data-city="tokyo"
+              data-timezone="Asia/Tokyo"
+            >
+              <span class="city-name">Tokyo</span>
+              <span class="city-state" aria-hidden="true">&#9728;</span>
+            </button>
+          </div>
           <button
             class="city-marker"
             data-city="sydney"
